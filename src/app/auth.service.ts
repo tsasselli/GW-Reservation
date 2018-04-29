@@ -1,10 +1,14 @@
+import { User } from './interface/user';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { Observable } from '@firebase/util';
 
 @Injectable()
 export class AuthService {
+
+  user$: Observable<firebase.User>;
 
   constructor(private afAuth: AngularFireAuth,
               private route: ActivatedRoute,) { }
@@ -27,4 +31,5 @@ export class AuthService {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
   }
+
 }

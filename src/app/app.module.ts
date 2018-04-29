@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -8,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { NavAuthComponent } from './navbar/nav-auth/nav-auth.component';
 import { NavBarComponent } from './navbar/nav-bar/nav-bar.component';
 import { HomeComponent } from './welcome/home/home.component';
+import { AngularFireModule } from 'angularfire2';
 
 @NgModule ({
     declarations: [
@@ -19,6 +21,7 @@ import { HomeComponent } from './welcome/home/home.component';
     ],
      imports: [
         BrowserModule,
+        AngularFireModule.initializeApp(environment.firebase),
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
             { path: 'login', component: LoginComponent },
