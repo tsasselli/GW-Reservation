@@ -1,9 +1,12 @@
-import { LoginComponent } from './login/login.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NavAuthComponent } from './nav-auth/nav-auth.component';
+import { LoginComponent } from './login/login.component';
+import { NavAuthComponent } from './navbar/nav-auth/nav-auth.component';
+import { NavBarComponent } from './navbar/nav-bar/nav-bar.component';
+import { HomeComponent } from './welcome/home/home.component';
 
 @NgModule ({
     declarations: [
@@ -11,9 +14,14 @@ import { NavAuthComponent } from './nav-auth/nav-auth.component';
         NavBarComponent,
         LoginComponent,
         NavAuthComponent,
+        HomeComponent
     ],
      imports: [
-        BrowserModule
+        BrowserModule,
+        RouterModule.forRoot([
+            { path: '', component: HomeComponent },
+            { path: 'login', component: LoginComponent },
+        ])
     ],
       bootstrap: [
         AppComponent
