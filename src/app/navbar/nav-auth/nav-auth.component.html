@@ -1,2 +1,6 @@
-<button class="btn btn-light">Login</button>
-<button class="btn btn-light">Log Out</button>
+
+<li class="nav-item">
+    <span *ngIf="user" class="navbar-text">
+        {{ user.name }}
+    </span>
+</li>

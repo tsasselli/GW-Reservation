@@ -1,5 +1,6 @@
-import { AuthService } from './../auth.service';
+import { AuthService } from '../service/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'gw-login',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent {
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService,) {
   }
 
   loginWithGoogle() {
@@ -21,5 +22,6 @@ export class LoginComponent {
 
   logOut() {
     this.auth.logout();
+    console.log("logged out");
   }
 }
