@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { NavAuthComponent } from './navbar/nav-auth/nav-auth.component';
 import { NavBarComponent } from './navbar/nav-bar/nav-bar.component';
@@ -22,6 +23,9 @@ import { HomeComponent } from './welcome/home/home.component';
             { path: '', component: HomeComponent },
             { path: 'login', component: LoginComponent },
         ])
+    ],
+    providers: [
+        AuthService,
     ],
       bootstrap: [
         AppComponent
