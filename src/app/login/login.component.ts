@@ -18,4 +18,8 @@ export class LoginComponent {
   loginWithGithub() {
     this.auth.loginWithGithub();
   }
+
+  logOut() {
+    this.auth.logout();
+  }
 }

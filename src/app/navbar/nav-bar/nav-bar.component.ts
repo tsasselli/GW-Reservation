@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { INavigationItem } from '../interface/INavigationItem';
 import { UrlResolver } from '@angular/compiler';
 
 @Component({
@@ -9,10 +8,10 @@ import { UrlResolver } from '@angular/compiler';
 })
 
 export class NavBarComponent implements OnInit {
-  public menuItems: INavigationItem[] = [{
-    label: "test",
-    url: "/"
-  }];
+  // public menuItems: INavigationItem[] = [{
+  //   label: "test",
+  //   url: "/"
+  // }];
 
   constructor() { }
 
