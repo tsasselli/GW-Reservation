@@ -1,6 +1,8 @@
-
 <li class="nav-item">
     <span *ngIf="user" class="navbar-text">
         {{ user.name }}
     </span>
+</li>
+<li class="nav-item">
+    <gw-login [user]='user'></gw-login>
 </li>

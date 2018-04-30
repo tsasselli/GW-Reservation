@@ -17,4 +17,5 @@ export class NavAuthComponent implements OnInit {
      this.auth.appUser$.subscribe(appUser => this.user = appUser);
   }
 
+
 }

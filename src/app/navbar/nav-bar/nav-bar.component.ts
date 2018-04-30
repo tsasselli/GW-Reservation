@@ -8,11 +8,8 @@ import { UrlResolver } from '@angular/compiler';
 })
 
 export class NavBarComponent implements OnInit {
-  // public menuItems: INavigationItem[] = [{
-  //   label: "test",
-  //   url: "/"
-  // }];
 
+  
   constructor() { }
 
   ngOnInit() {
