@@ -2,9 +2,9 @@ import 'rxjs/add/observable/of';
 
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { Observable } from 'rxjs/Observable';
 
 import { AppUser } from '../interface/app-user';
 import { UserService } from './user.service';
@@ -23,7 +23,7 @@ export class AuthService {
 
   loginWithGoogle() {
     this.saveParams();
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   
   loginWithGithub() {

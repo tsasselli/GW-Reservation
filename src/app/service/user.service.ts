@@ -1,13 +1,13 @@
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AppUser } from './../interface/app-user';
 import { Injectable } from '@angular/core';
-import { FirebaseObjectObservable } from "angularfire2/database-deprecated";
-import { AngularFireDatabase } from "angularfire2/database-deprecated";
+import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database-deprecated";
 import * as firebase from 'firebase';
 
 @Injectable()
 export class UserService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,) { }
 
   // simple save/update functionality for the db. 
   save(user: firebase.User) {
@@ -21,4 +21,6 @@ export class UserService {
   get(uid: string): FirebaseObjectObservable<AppUser> {
     return this.db.object('/users/' + uid);
   }
+
+  
 }
