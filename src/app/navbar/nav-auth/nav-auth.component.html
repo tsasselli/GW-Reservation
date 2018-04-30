@@ -1,8 +1,20 @@
-<li class="nav-item">
-    <span *ngIf="user" class="navbar-text">
-        {{ user.name }}
-    </span>
-</li>
-<li class="nav-item">
-    <gw-login [user]='user'></gw-login>
-</li>
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <span *ngIf="user" class="navbar-text">
+            {{ user.name }}
+        </span>
+    </li>
+    <li ngbDropdown *ngIf="!user; else loggedIn" class="nav-item dropdown ">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navBarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Login
+        </a>
+        <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="navBarDropdown">
+            <gw-login></gw-login>
+        </div>
+    </li>
+    <ng-template #loggedIn>
+        <li class="nav-item">
+            <gw-logout></gw-logout>
+        </li>
+    </ng-template>
+</ul>
