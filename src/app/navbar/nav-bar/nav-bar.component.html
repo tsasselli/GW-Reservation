@@ -3,6 +3,12 @@
     <a class="navbar-brand" routerLink="/">
       Reservations
     </a>
-      <gw-nav-auth></gw-nav-auth>
+    <ul class="navbar-nav mx-auto">
+      <li class="list-item" *ngFor="let item of navArr">
+        <a [href]="item.url"></a>
+        <span class="nav-bar-text">{{ item.title }}</span>
+      </li>
+    </ul>
+    <gw-nav-auth></gw-nav-auth>
   </div>
 </nav>

@@ -1,3 +1,4 @@
+import { INavigationItem } from './../../interface/INavigationItem';
 import { Component, OnInit } from '@angular/core';
 import { UrlResolver } from '@angular/compiler';
 
@@ -8,11 +9,19 @@ import { UrlResolver } from '@angular/compiler';
 })
 
 export class NavBarComponent implements OnInit {
-
+  public navArr: INavigationItem[];
   
   constructor() { }
 
   ngOnInit() {
+    this.navArr = [
+      {
+        title: "Welcome",
+        url: "/welcome",
+      },
+      {
+      title: "about",
+      url: "/about",
+    }]
   }
-
 }
