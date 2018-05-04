@@ -18,19 +18,19 @@ import { NavBarComponent } from './navbar/nav-bar/nav-bar.component';
 import { AuthService } from './service/auth.service';
 import { UserService } from './service/user.service';
 import { HomeComponent } from './welcome/home/home.component';
+import { RoomComponent } from './room/room.component';
+import { RoomService } from './service/room.service';
 
 const routes: Routes = [
     {   path: 'welcome', component: HomeComponent},
     {   path: 'about', component: AboutComponent },
+    {   path: 'room/:id', component: RoomComponent },
     {   
         path: '', 
         redirectTo: 'welcome',
         pathMatch: 'full'
     },
-    {
-        path: '**',
-        component: NotFoundComponent
-    }
+    { path: '**',component: NotFoundComponent }
 ];
 
 
@@ -42,6 +42,9 @@ const routes: Routes = [
         NavAuthComponent,
         HomeComponent,
         LogoutComponent,
+        RoomComponent,
+        AboutComponent,
+        NotFoundComponent,
     ],
      imports: [
         BrowserModule,
@@ -54,7 +57,7 @@ const routes: Routes = [
     providers: [
         AuthService,
         UserService,
-        
+        RoomService,
     ],
       bootstrap: [
         AppComponent

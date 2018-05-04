@@ -1,3 +1,5 @@
+import { IRoom } from './../../interface/IRoom';
+import { RoomService } from './../../service/room.service';
 import { INavigationItem } from './../../interface/INavigationItem';
 import { Component, OnInit } from '@angular/core';
 import { UrlResolver } from '@angular/compiler';
@@ -9,19 +11,17 @@ import { UrlResolver } from '@angular/compiler';
 })
 
 export class NavBarComponent implements OnInit {
-  public navArr: INavigationItem[];
+  navArr: INavigationItem[];
+  rooms: IRoom[];
   
-  constructor() { }
+  constructor(private roomService: RoomService) { }
 
   ngOnInit() {
-    this.navArr = [
-      {
-        title: "Welcome",
-        url: "/welcome",
-      },
-      {
-      title: "about",
-      url: "/about",
-    }]
+    this.navArr = this.roomService.rooms.map(room => {
+      return {
+      title: room.title,
+      url: "room/" + room.id
+      }
+    })
   }
 }
