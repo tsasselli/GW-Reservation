@@ -1,0 +1,84 @@
+<h1> Make a reservation for room: {{ roomId }}</h1>
+
+<form #f="ngForm" (ngSubmit)="save(f.value)">
+    <div class="form-group">
+      <label for="reserveFor">Reserve For:</label>
+      <select #reserveFor="ngModel" 
+              name="reserveFor" 
+              id="reserveFor" 
+              class="form-control"
+              ngModel required>
+        <option *ngFor="let resv of reserveFor">
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="reserveFor.touched && reserveFor.invalid">
+        Please choose and activity from the list
+      </div>
+    </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <div class="input-group">
+      <input type="text"
+             class="form-control" 
+             #userEmail="ngModel" 
+             [ngClass]="{'is-invalid' : userEmail.errors && userEmail.touched}"
+             pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+             name="email"
+             ngModel
+      required>>
+      <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
+        Email required
+      </div>
+      <div [hidden]="!userEmail.errors?.pattern" class="invalid-feedback">
+        Email is not valid, please enter a valid Email address.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="confirmEmail">Confirm Email</label>
+    <div class="input-group">
+      <input type="text"
+             class="form-control" 
+             #congirmEmail="ngModel" 
+             [ngClass]="{'is-invalid' : congirmEmail.errors && congirmEmail.touched}"
+             pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+             name="confirmEmail"
+             ngModel
+             required>
+      <div [hidden]="!confirmEmail.errors?.required" class="invalid-feedback">
+        Email required
+      </div>
+      <div [hidden]="!confirmEmail.errors?.pattern" class="invalid-feedback">
+        Email is not valid, please enter a valid Email address.
+      </div>
+    </div>
+  </div>
+  <!-- <div class="form-group">
+    <label for="startTime">Start Time</label>
+    <input #startTime="ngModel" 
+           [(ngModel)]="startTime"
+           name="startTime" 
+           id="startTime"
+           type="number"
+           class="form-control"
+           required minDate="startTime"> 
+    </div>
+  <div class="alert alert-danger" *ngIf="startTime.touched && startTime.invalid">
+    <div *ngIf="startTime?.errors?.required">Start time required </div>
+    <div *ngIf="startTime?.errors?.minDate">Please a valid date, choose a date from {{ startTime }} forward! </div>
+  </div> -->
+<div class="form-group">
+  <p class="input-group">
+    <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="ctrl.date.value" is-open="ctrl.date.showFlag"
+    />
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" ng-click="ctrl.date.showFlag = true">
+        <i class="fa fa-calendar"></i>
+      </button>
+    </span>
+  </p>
+</div>
+
+  <button class="btn btn-primary">Save</button>
+  <!-- <button type="button" (click)="delete()" class="btn btn-danger">Delete</button> -->
+</form>

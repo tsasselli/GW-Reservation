@@ -5,8 +5,7 @@
     </a>
     <ul class="navbar-nav mx-auto">
       <li class="list-item mx-2" *ngFor="let item of navArr">
-        <a [href]="item.url"></a>
-        <span class="nav-bar-text">{{ item.title }}</span>
+        <a [href]="item.url">{{ item.title }}</a>
       </li>
     </ul>
     <gw-nav-auth></gw-nav-auth>
