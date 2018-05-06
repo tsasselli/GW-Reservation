@@ -13,6 +13,7 @@ export class RoomFormComponent implements OnInit {
   reserveFor: string[];
   startTime: string;
   endTime: string;
+  selectedDate;
 
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,

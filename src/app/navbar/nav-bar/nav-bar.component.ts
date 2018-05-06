@@ -38,13 +38,13 @@ export class NavBarComponent implements OnInit {
           title: room.title,
           url: room.id
         };
-        console.log(navItem, "navItem");
+        console.log(rooms, "navItem map",);
         return navItem;
       });
     })
     .subscribe(rooms => {
       this.navArr = this.navArr.concat(rooms);
-      console.log(rooms);
+      console.log(this.navArr);
     })
   }
 }

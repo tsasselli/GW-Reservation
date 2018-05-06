@@ -2,30 +2,30 @@
 
 <form #f="ngForm" (ngSubmit)="save(f.value)">
     <div class="form-group">
-      <label for="reserveFor">Reserve For:</label>
-      <select #reserveFor="ngModel" 
-              name="reserveFor" 
-              id="reserveFor" 
+      <label for="reserveReason">Reserve For:</label>
+      <select #reserveReason="ngModel" 
+              name="reserveReason" 
+              id="reserveReason" 
               class="form-control"
               ngModel required>
         <option *ngFor="let resv of reserveFor">
         </option>
       </select>
-      <div class="alert alert-danger" *ngIf="reserveFor.touched && reserveFor.invalid">
+      <div class="alert alert-danger" *ngIf="reserveReason.touched && reserveReason.invalid">
         Please choose and activity from the list
       </div>
     </div>
   <div class="form-group">
-    <label for="email">Email</label>
+    <label for="userEmail">Email</label>
     <div class="input-group">
       <input type="text"
              class="form-control" 
              #userEmail="ngModel" 
              [ngClass]="{'is-invalid' : userEmail.errors && userEmail.touched}"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-             name="email"
+             name="userEmail"
              ngModel
-      required>>
+             required>
       <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
         Email required
       </div>
@@ -39,8 +39,8 @@
     <div class="input-group">
       <input type="text"
              class="form-control" 
-             #congirmEmail="ngModel" 
-             [ngClass]="{'is-invalid' : congirmEmail.errors && congirmEmail.touched}"
+             #confirmEmail="ngModel" 
+             [ngClass]="{'is-invalid' : confirmEmail.errors && confirmEmail.touched}"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="confirmEmail"
              ngModel
@@ -67,17 +67,23 @@
     <div *ngIf="startTime?.errors?.required">Start time required </div>
     <div *ngIf="startTime?.errors?.minDate">Please a valid date, choose a date from {{ startTime }} forward! </div>
   </div> -->
-<div class="form-group">
-  <p class="input-group">
-    <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="ctrl.date.value" is-open="ctrl.date.showFlag"
-    />
-    <span class="input-group-btn">
-      <button type="button" class="btn btn-default" ng-click="ctrl.date.showFlag = true">
-        <i class="fa fa-calendar"></i>
-      </button>
-    </span>
-  </p>
-</div>
+  <div class="form-group">
+    <div class="input-group">
+      <input class="form-control"
+             placeholder="yyyy-mm-dd"
+             name="dp"
+             [(ngModel)]="selectedDate"
+             ngbDatepicker
+             #d="ngbDatepicker"
+             required>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+          <img src="../../../assets/images/calendarSVG.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+    </div>
+  </div>
+
 
   <button class="btn btn-primary">Save</button>
   <!-- <button type="button" (click)="delete()" class="btn btn-danger">Delete</button> -->
