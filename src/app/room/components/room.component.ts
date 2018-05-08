@@ -1,8 +1,8 @@
-import { IRoom } from './../interface/IRoom';
+import { IRoom } from '../../interface/IRoom';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { map, take } from 'rxjs/operators';
-import { RoomService } from '../service/room.service';
+import { RoomService } from '../../service/room.service';
 
 @Component({
   selector: 'gw-room',

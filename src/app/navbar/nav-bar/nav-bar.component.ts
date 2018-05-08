@@ -36,9 +36,9 @@ export class NavBarComponent implements OnInit {
       return rooms.map(room => {
         const navItem: INavigationItem = {
           title: room.title,
-          url: "rooms/" + room.id
+          url: "/rooms/" + room.id
         };
-        console.log(rooms, "navItem map",);
+        console.log(navItem, "navItem map",);
         return navItem;
       });
     })

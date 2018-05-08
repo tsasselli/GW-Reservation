@@ -1,0 +1,11 @@
+<div>
+  <h1 *ngIf="room"> Welcome to {{ room?.title }} </h1>
+  <h2 *ngIf="!room">There are no reservations for {{ room?.title }} today</h2>
+</div>
+
+
+<p>Room List Component</p>
+<div *ngFor="let reservation of room?.reservations">
+  <h2>{{reservation.email}}</h2>
+  <h1>{{ reservation.reason }}</h1>
+</div>

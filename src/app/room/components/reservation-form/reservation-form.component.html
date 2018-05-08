@@ -1,61 +1,61 @@
 <h1> Make a reservation for room: {{ roomId }}</h1>
 
-<form #f="ngForm" (ngSubmit)="save(f.value)">
+<form #reservationForm="ngForm" (ngSubmit)="save(reservationForm.value)">
     <div class="form-group">
-      <label for="reserveReason">Reserve For:</label>
-      <select #reserveReason="ngModel" 
-              name="reserveReason" 
-              id="reserveReason" 
-              [ngClass]="{'is-invalid' : reserveReason.errors && reserveReason.touched }"
+      <label for="reason">Reserve For:</label>
+      <select #reason="ngModel" 
+              name="reason" 
+              id="reason" 
+              [ngClass]="{'is-invalid' : reason.errors && reason.touched }"
               class="form-control"
               ngModel required>
         <option *ngFor="let type of reservationType">
           {{ type }}
         </option>
       </select>
-      <div class="invalid-feedback" *ngIf="reserveReason.touched && reserveReason.invalid">
+      <div class="invalid-feedback" *ngIf="reason.touched && reason.invalid">
         Please choose and activity from the list
       </div>
     </div>
   <div class="form-group">
-    <label for="userEmail">Email</label>
+    <label for="email">Email</label>
     <div class="input-group">
       <input type="text"
              class="form-control" 
-             #userEmail="ngModel" 
-             [ngClass]="{'is-invalid' : userEmail.errors && userEmail.touched }"
+             #email="ngModel" 
+             [ngClass]="{'is-invalid' : email.errors && email.touched }"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-             name="userEmail"
+             name="email"
              ngModel
              required>
-      <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
+      <div [hidden]="!email.errors?.required" class="invalid-feedback">
         Email required
       </div>
-      <div [hidden]="!userEmail.errors?.pattern" class="invalid-feedback">
+      <div [hidden]="!email.errors?.pattern" class="invalid-feedback">
         Email is not valid, please enter a valid Email address.
       </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="confirmEmail">Confirm Email</label>
+    <label for="emailConfirmation">Confirm Email</label>
     <div class="input-group">
       <input type="text"
              class="form-control" 
-             #confirmEmail="ngModel" 
-             [ngClass]="{'is-invalid' : confirmEmail.errors && confirmEmail.touched}"
+             #emailConfirmation="ngModel" 
+             [ngClass]="{'is-invalid' : emailConfirmation.errors && emailConfirmation.touched}"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-             name="confirmEmail"
-             [equalTo]="userEmail"
+             name="emailConfirmation"
+             [equalTo]="email"
              ngModel
              email
              required>
-      <div [hidden]="!confirmEmail.errors?.required" class="invalid-feedback">
+      <div [hidden]="!emailConfirmation.errors?.required" class="invalid-feedback">
         Email required
       </div>
-      <div [hidden]="!confirmEmail.errors?.pattern" class="invalid-feedback">
+      <div [hidden]="!emailConfirmation.errors?.pattern" class="invalid-feedback">
         Email is not valid, please enter a valid Email address.
       </div>
-      <div [hidden]="!confirmEmail.errors?.equalTo" class="invalid-feedback">
+      <div [hidden]="!emailConfirmation.errors?.equalTo" class="invalid-feedback">
         Please make sure both emails match.
       </div>
     </div>
@@ -74,7 +74,7 @@
     <div *ngIf="startTime?.errors?.required">Start time required </div>
     <div *ngIf="startTime?.errors?.minDate">Please a valid date, choose a date from {{ startTime }} forward! </div>
   </div> -->
-  <div class="form-group">
+  <!-- <div class="form-group">
     <div class="input-group">
       <input class="form-control"
              placeholder="yyyy-mm-dd"
@@ -89,9 +89,9 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
-  <button class="btn btn-primary">Save</button>
+  <button [disabled]="reservationForm.invalid" class="btn btn-primary">Save</button>
   <!-- <button type="button" (click)="delete()" class="btn btn-danger">Delete</button> -->
 </form>
