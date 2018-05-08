@@ -6,12 +6,14 @@
       <select #reserveReason="ngModel" 
               name="reserveReason" 
               id="reserveReason" 
+              [ngClass]="{'is-invalid' : reserveReason.errors && reserveReason.touched }"
               class="form-control"
               ngModel required>
-        <option *ngFor="let resv of reserveFor">
+        <option *ngFor="let type of reservationType">
+          {{ type }}
         </option>
       </select>
-      <div class="alert alert-danger" *ngIf="reserveReason.touched && reserveReason.invalid">
+      <div class="invalid-feedback" *ngIf="reserveReason.touched && reserveReason.invalid">
         Please choose and activity from the list
       </div>
     </div>
@@ -21,7 +23,7 @@
       <input type="text"
              class="form-control" 
              #userEmail="ngModel" 
-             [ngClass]="{'is-invalid' : userEmail.errors && userEmail.touched}"
+             [ngClass]="{'is-invalid' : userEmail.errors && userEmail.touched }"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="userEmail"
              ngModel
@@ -43,13 +45,18 @@
              [ngClass]="{'is-invalid' : confirmEmail.errors && confirmEmail.touched}"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="confirmEmail"
+             [equalTo]="userEmail"
              ngModel
+             email
              required>
       <div [hidden]="!confirmEmail.errors?.required" class="invalid-feedback">
         Email required
       </div>
       <div [hidden]="!confirmEmail.errors?.pattern" class="invalid-feedback">
         Email is not valid, please enter a valid Email address.
+      </div>
+      <div [hidden]="!confirmEmail.errors?.equalTo" class="invalid-feedback">
+        Please make sure both emails match.
       </div>
     </div>
   </div>

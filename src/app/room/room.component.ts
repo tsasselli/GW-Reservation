@@ -1,6 +1,8 @@
+import { IRoom } from './../interface/IRoom';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { map, take } from 'rxjs/operators';
+import { RoomService } from '../service/room.service';
 
 @Component({
   selector: 'gw-room',
@@ -10,20 +12,25 @@ import { map, take } from 'rxjs/operators';
 
 export class RoomComponent implements OnInit {
   id: string;
+  room: IRoom;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private roomService: RoomService) { }
 
   ngOnInit() {
-    this.route.paramMap
-      .pipe(
-        map(paramMapResponse => {
-          return paramMapResponse.get('id') + " was done mapped";
-        }),
-        take(1)
+    this.route.paramMap.pipe(
+        take(1) 
       )
-    .subscribe(idString => {
-      this.id = idString;
-    })
+    .subscribe(route => {
+      this.changeRoom(route.get('id'));
+    });
+  }
+
+  private changeRoom(id: string) {
+   this.roomService.getRoomById(id)
+    .subscribe(room => {
+      this.room = room;
+    });
   }
 
 }

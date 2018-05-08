@@ -1,16 +1,16 @@
-import { Reservation } from './../../interface/Reservation';
-import { RoomService } from './../../service/room.service';
+import { Reservation } from '../../interface/Reservation';
+import { RoomService } from '../../service/room.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'gw-room-form',
-  templateUrl: './room-form.component.html',
-  styleUrls: ['./room-form.component.scss']
+  selector: 'gw-reservation-form',
+  templateUrl: './reservation-form.component.html',
+  styleUrls: ['./reservation-form.component.scss']
 })
-export class RoomFormComponent implements OnInit {
+export class ReservationFormComponent implements OnInit {
   roomId: string;
-  reserveFor: string[];
+  reservationType: string[];
   startTime: string;
   endTime: string;
   selectedDate;
@@ -20,7 +20,7 @@ export class RoomFormComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.reserveFor = [
+    this.reservationType = [
       "Code Review",
       "Meeting",
       "Interview",
@@ -30,7 +30,15 @@ export class RoomFormComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.changeRoomId(params.get('id'));
     })
+    this.testId();
   }
+
+  testId() {
+    console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
+    console.log(this.roomId);
+  }
+
+
   // helper func for storing params/:id  to roomId
   private changeRoomId(id: string) {
     this.roomId = id;
@@ -39,7 +47,8 @@ export class RoomFormComponent implements OnInit {
   save(res: Reservation) {
     return this.roomService.saveReservationToDb(this.roomId, res)
     // navigates to the sibling route.. https://stackoverflow.com/questions/39124906/navigate-relative-with-angular-2-router-version-3
-      .then(() => this.router.navigate(["../list"], { relativeTo: this.route }));
+    // navigates to lists route, so user can see updated list.
+      .then(() => this.router.navigate(["../list"], { relativeTo: this.route })); 
   }
 
 }
