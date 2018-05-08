@@ -23,6 +23,7 @@ import { RoomService } from './service/room.service';
 import { UserService } from './service/user.service';
 import { HomeComponent } from './welcome/home/home.component';
 import { NewRoomFormComponent } from './room/components/new-room-form/new-room-form.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
     {   path: 'welcome', component: HomeComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
         AngularFireDatabaseModule,
         AngularFireAuthModule,
          FormsModule,
+         CommonModule,
          CustomFormsModule,
          NgbModule.forRoot(),
         AngularFireModule.initializeApp(environment.firebase),

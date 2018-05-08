@@ -1,3 +1,5 @@
+import { IRoom } from './../../../interface/IRoom';
+import { RoomService } from './../../../service/room.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-room-form.component.scss']
 })
 export class NewRoomFormComponent implements OnInit {
+  room: IRoom;
+  id: string;
+  name: string;
+  pictureUrl: string;
 
-  constructor() { }
+
+  constructor(private roomService: RoomService) { 
+    this.id = this.name.toLocaleLowerCase();
+  }
 
   ngOnInit() {
   }
 
+  submitNewRoom(room: IRoom) {
+    let newRoom = new IRoom (this.id, this.name,this.pictureUrl, []);
+    this.roomService.createRoom(newRoom);
+  }
+ 
 }

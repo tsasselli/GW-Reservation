@@ -33,10 +33,6 @@ export class ReservationFormComponent implements OnInit {
     this.testId();
   }
 
-  testId() {
-    console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
-  }
-
   save(res: Reservation) {
     return this.roomService.saveReservation(this.roomId, res)
     // navigates to the sibling route.. https://stackoverflow.com/questions/39124906/navigate-relative-with-angular-2-router-version-3
@@ -44,10 +40,13 @@ export class ReservationFormComponent implements OnInit {
       .then(() => this.router.navigate(["../reservations"], { relativeTo: this.route })); 
   }
 
+  private testId() {
+    console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
+  }
+
   // helper func for storing params/:id  to roomId
   private assignRoomId(id: string) {
     this.roomId = id;
   }
-
 
 }

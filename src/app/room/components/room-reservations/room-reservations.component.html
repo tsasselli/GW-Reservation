@@ -1,11 +1,16 @@
 <div>
-  <h1 *ngIf="room"> Welcome to {{ room?.title }} </h1>
-  <h2 *ngIf="!room">There are no reservations for {{ room?.title }} today</h2>
+  <h1 *ngIf="room"> Welcome to {{ room?.name }} </h1>
+  <ng-container *ngFor="let reservation of room?.reservations">
+      <div *ngIf="room.reservations.length > 0; else noRoom">
+        There are {{ room.reservations.length }} reservations for {{ room?.name }} today
+      </div>
+      <h2>Reservations</h2>
+      <div class="card" *ngFor="let resv of room?.reservations">
+        <h4>Email: {{resv.email}}</h4>
+        <h4>Reservation Reason: {{ resv.reason }}</h4>
+      </div>
+  </ng-container>
+  <div #noRoom [hidden]="room?.reservations.length > 0">There are no reservations for {{ room?.name }} today</div>
 </div>
 
 
-<p>Room List Component</p>
-<div *ngFor="let reservation of room?.reservations">
-  <h2>{{reservation.email}}</h2>
-  <h1>{{ reservation.reason }}</h1>
-</div>
