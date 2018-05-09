@@ -10,16 +10,7 @@
             <span *ngIf="user" class="navbar-text">{{ user.name }}</span>
         </a>
         <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="navBarDropdown">
-            <gw-login></gw-login>
+            <gw-login [user]="user"></gw-login>
         </div>
     </li>
-    <!-- <ng-template #loggedIn>
-        <a *ngIf="user" ngbDropdownToggle class="nav-link dropdown-toggle" id="navBarDropdown" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            {{ user.name }}
-        </a>
-        <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="navBarDropdown">
-            <gw-login></gw-login>
-        </div>
-    </ng-template> -->
 </ul>

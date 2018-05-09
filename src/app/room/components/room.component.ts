@@ -18,9 +18,7 @@ export class RoomComponent implements OnInit {
               private roomService: RoomService) { }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-        take(1) 
-      )
+    this.route.paramMap
     .subscribe(route => {
       this.changeRoom(route.get('id'));
     });
