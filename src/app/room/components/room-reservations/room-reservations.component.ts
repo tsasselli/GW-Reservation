@@ -23,7 +23,6 @@ export class RoomReservationsComponent implements OnInit {
     })
 
     this.testId();
-    
    }
 
   testId() {

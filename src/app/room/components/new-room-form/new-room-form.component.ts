@@ -10,20 +10,19 @@ import { Component, OnInit } from '@angular/core';
 export class NewRoomFormComponent implements OnInit {
   room: IRoom;
   id: string;
-  name: string;
+  roomName: string;
   pictureUrl: string;
 
 
   constructor(private roomService: RoomService) { 
-    this.id = this.name.toLocaleLowerCase();
   }
 
   ngOnInit() {
   }
 
-  submitNewRoom(room: IRoom) {
-    let newRoom = new IRoom (this.id, this.name,this.pictureUrl, []);
+  submitNewRoom(name, picture) {
+    const id = this.room.name.toLocaleLowerCase();
+     const newRoom = new IRoom (id, name, picture, []);
     this.roomService.createRoom(newRoom);
   }
- 
 }

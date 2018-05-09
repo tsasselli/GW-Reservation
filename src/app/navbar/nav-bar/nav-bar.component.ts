@@ -21,9 +21,13 @@ export class NavBarComponent implements OnInit {
   constructor(private roomService: RoomService) { }
 
   ngOnInit() {
-     this.roomService.rooms$
-     // add welcome to front of array. 
-      .do( rooms => {
+   this.initalizeRoom();
+  }
+
+  private initalizeRoom() {
+    this.roomService.rooms$
+      // add welcome to front of array. 
+      .do(rooms => {
         this.navArr = [];
         this.navArr.unshift({
           title: "Welcome",
@@ -32,19 +36,20 @@ export class NavBarComponent implements OnInit {
         console.log(rooms, "do")
         return rooms;
       })
-    .map(rooms => {
-      return rooms.map(room => {
-        const navItem: INavigationItem = {
-          title: room.name,
-          url: "/rooms/" + room.id
-        };
-        console.log(navItem, "navItem map",);
-        return navItem;
-      });
-    })
-    .subscribe(rooms => {
-      this.navArr = this.navArr.concat(rooms);
-      console.log(this.navArr);
-    })
+      // add the rooms name and id properties
+      .map(rooms => {
+        return rooms.map(room => {
+          const navItem: INavigationItem = {
+            title: room.name,
+            url: "/rooms/" + room.id
+          };
+          console.log(navItem, "navItem map");
+          return navItem;
+        });
+      })
+      .subscribe(rooms => {
+        this.navArr = this.navArr.concat(rooms);
+        console.log(this.navArr);
+      })
   }
 }

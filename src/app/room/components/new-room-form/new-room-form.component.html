@@ -1,3 +1,28 @@
-<p>
-  new-room-form works!
-</p>
+<form #newRoomForm="ngForm">
+  <div class="form-group">
+    <label for="">Name</label>
+    <input #roomName="ngModel"
+           name="roomName"
+           type="text"
+           class="form-control"
+           ngModel
+           required>
+    <div class="alert alert-danger" *ngIf="roomName.touched && roomName.invalid">
+      <div *ngIf="!roomName.errors?.required">Name is required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="">Room Picture</label>
+    <input #pictureUrl="ngModel"
+           name="pictureUrl"
+           ngModel
+           type="text"
+           class="form-control"
+           placeholder=""
+           required>
+    <div class="alert alert-danger" *ngIf="pictureUrl.touched && pictureUrl.invalid">
+      <div *ngIf="!picture.errors.required">Address is required.</div>
+    </div>
+  </div>
+  <button (click)="submitNewRoom(roomName, pictureUrl)" [disabled]="!newRoomForm.valid" class="btn btn-primary">Add New Room</button>
+</form>

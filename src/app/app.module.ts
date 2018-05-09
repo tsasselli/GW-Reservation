@@ -28,6 +28,7 @@ import { CommonModule } from '@angular/common';
 const routes: Routes = [
     {   path: 'welcome', component: HomeComponent },
     {   path: 'about', component: AboutComponent }, 
+    {   path: 'rooms/new', component: NewRoomFormComponent }, 
     {   path: 'rooms/:id', component: RoomComponent }, 
     {   path: 'rooms/:id/form', component: ReservationFormComponent },
     {   path: 'rooms/:id/reservations', component: RoomReservationsComponent },
