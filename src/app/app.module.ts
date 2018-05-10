@@ -13,7 +13,6 @@ import { NavAuthComponent } from './navbar/nav-auth/nav-auth.component';
 import { NavBarComponent } from './navbar/nav-bar/nav-bar.component';
 import { RoomModule } from './room/room.module';
 import { AuthService } from './service/auth.service';
-import { RoomService } from './service/room.service';
 import { UserService } from './service/user.service';
 
 
@@ -37,7 +36,6 @@ import { UserService } from './service/user.service';
     providers: [
         AuthService,
         UserService,
-        RoomService
     ],
       bootstrap: [ AppComponent ]
 })

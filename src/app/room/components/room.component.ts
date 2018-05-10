@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs/Subscription';
 import { IRoom } from '../../interface/IRoom';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map, take } from 'rxjs/operators';
 import { RoomService } from '../../service/room.service';
 
@@ -13,6 +14,7 @@ import { RoomService } from '../../service/room.service';
 export class RoomComponent implements OnInit {
   id: string;
   room: IRoom;
+  roomSubs: Subscription
 
   constructor(private route: ActivatedRoute,
               private roomService: RoomService) { }
@@ -25,10 +27,9 @@ export class RoomComponent implements OnInit {
   }
 
   private changeRoom(id: string) {
-   this.roomService.getRoomById(id)
-    .subscribe(room => {
+  this.roomSubs = this.roomService.getRoomById(id)
+     .subscribe(room => {
       this.room = room;
     });
   }
-
 }
