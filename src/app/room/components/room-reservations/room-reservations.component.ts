@@ -18,7 +18,8 @@ export class RoomReservationsComponent implements OnInit {
               private roomService: RoomService) { }
 
   ngOnInit() {
-    this.route.paramMap
+    //this.room = this.route.snapshot.data['resvList'];
+    this.route.parent.paramMap
     .subscribe(params => {
       this.assignRoom(params.get('id'));
     })

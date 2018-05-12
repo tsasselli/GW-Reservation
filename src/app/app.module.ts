@@ -1,6 +1,6 @@
+import { RoomService } from './service/room.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -14,7 +14,6 @@ import { NavBarComponent } from './navbar/nav-bar/nav-bar.component';
 import { RoomModule } from './room/room.module';
 import { AuthService } from './service/auth.service';
 import { UserService } from './service/user.service';
-import { RoomService } from './service/room.service';
 
 
 @NgModule ({
@@ -29,7 +28,6 @@ import { RoomService } from './service/room.service';
         BrowserModule,
         AngularFireDatabaseModule,
         AngularFireAuthModule,
-        NgbModule.forRoot(),
         AngularFireModule.initializeApp(environment.firebase),
         RoomModule,
         AppRoutingModule,
@@ -38,7 +36,7 @@ import { RoomService } from './service/room.service';
         AuthService,
         UserService,
         RoomService
-    ],
+        ],
       bootstrap: [ AppComponent ]
 })
 export class AppModule {

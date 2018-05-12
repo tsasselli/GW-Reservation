@@ -6,19 +6,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './welcome/home/home.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'welcome', component: HomeComponent },
+  { path: 'rooms', loadChildren: './room/room-routing.module#RoomRoutingModule'},
   { path: 'about', component: AboutComponent },
-  {   
-      path: '', 
-      redirectTo: 'welcome',
-      pathMatch: 'full'
-  },
-  { path: '**', component: NotFoundComponent }
-];
-
+  { path: '**', component: NotFoundComponent },
+  
+]
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true }) ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
 

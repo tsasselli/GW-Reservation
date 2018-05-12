@@ -20,6 +20,7 @@ export class RoomComponent implements OnInit {
               private roomService: RoomService) { }
 
   ngOnInit() {
+    //this.room = this.route.snapshot.data['resvList'];
     this.route.paramMap
     .subscribe(route => {
       this.changeRoom(route.get('id'));
@@ -29,7 +30,7 @@ export class RoomComponent implements OnInit {
   private changeRoom(id: string) {
     if (!id) return;
     
-  this.roomSubs = this.roomService.getRoomById(id)
+    this.roomService.getRoomById(id)
      .subscribe(room => {
       this.room = room;
     });

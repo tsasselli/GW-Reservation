@@ -41,15 +41,13 @@ export class NavBarComponent implements OnInit {
         return rooms.map(room => {
           const navItem: INavigationItem = {
             title: room.name,
-            url: "/rooms/" + room.id
+            url: "rooms/" + room.id
           };
-          console.log(navItem, "navItem map");
           return navItem;
         });
       })
       .subscribe(rooms => {
         this.navArr = this.navArr.concat(rooms);
-        console.log(this.navArr);
       })
   }
 }
