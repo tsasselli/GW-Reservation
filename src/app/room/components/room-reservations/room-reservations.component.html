@@ -1,6 +1,5 @@
 <div>
-  <h1 *ngIf="room"> Welcome to {{ room?.name }} </h1>
-  <ng-container *ngFor="let reservation of room?.reservations">
+    <ng-container *ngFor="let reservation of room?.reservations">
       <div *ngIf="room?.reservations.length > 0; else noRoom">
         There are {{ room?.reservations.length }} reservations for {{ room?.name }} today
       </div>

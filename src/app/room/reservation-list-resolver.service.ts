@@ -11,8 +11,15 @@ export class ReservationListResolverService implements Resolve<IRoom>{
   constructor(private roomService: RoomService) { }
 
   resolve(route: ActivatedRouteSnapshot, rState: RouterStateSnapshot) : Observable<IRoom> {
-    const id = route.paramMap.get('id');
-    return this.roomService.getRoomById('id');
+    const id = route.parent.paramMap.get('id');
+    return this.roomService.getRoomById(id).map(room => {
+      if (!room.reservations) return;
+
+      room.reservations.forEach((reservation) => {
+        console.log(reservation);
+      });
+      return room;
+    })
   }
 
 }
