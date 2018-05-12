@@ -27,6 +27,8 @@ export class RoomComponent implements OnInit {
   }
 
   private changeRoom(id: string) {
+    if (!id) return;
+    
   this.roomSubs = this.roomService.getRoomById(id)
      .subscribe(room => {
       this.room = room;

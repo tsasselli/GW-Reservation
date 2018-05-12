@@ -14,9 +14,7 @@ const routes: Routes = [
         component: RoomComponent,
         children: [
             {   path: 'form', component: ReservationFormComponent },
-            {   path: 'reservations',
-                component: RoomReservationsComponent
-            },
+            {   path: 'reservations', component: RoomReservationsComponent },
             {
                 path: "",
                 redirectTo: "reservations",

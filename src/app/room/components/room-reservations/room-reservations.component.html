@@ -6,8 +6,8 @@
       </div>
       <h2>Reservations</h2>
       <div class="card" *ngFor="let resv of room?.reservations">
-        <h4>Email: {{resv.email}}</h4>
-        <h4>Reservation Reason: {{ resv.reason }}</h4>
+        <li>Email: {{resv.email}}</li>
+        <li>Reservation Reason: {{ resv.reason }}</li>
       </div>
   </ng-container>
   <div #noRoom [hidden]="room?.reservations.length > 0">There are no reservations for {{ room?.name }} today</div>

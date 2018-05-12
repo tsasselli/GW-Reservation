@@ -14,6 +14,7 @@ import { NavBarComponent } from './navbar/nav-bar/nav-bar.component';
 import { RoomModule } from './room/room.module';
 import { AuthService } from './service/auth.service';
 import { UserService } from './service/user.service';
+import { RoomService } from './service/room.service';
 
 
 @NgModule ({
@@ -36,6 +37,7 @@ import { UserService } from './service/user.service';
     providers: [
         AuthService,
         UserService,
+        RoomService
     ],
       bootstrap: [ AppComponent ]
 })

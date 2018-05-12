@@ -30,8 +30,12 @@ export class RoomReservationsComponent implements OnInit {
   }
 
    private assignRoom(id) {
+     if (!id) return;
+     
      this.roomId = id;
      this.roomService.getRoomById(id).map(room => {
+       if (!room.reservations) return;
+
        room.reservations.forEach((reservation) => {
          console.log(reservation);
        });
