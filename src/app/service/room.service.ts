@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IRoom } from './../interface/IRoom';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';

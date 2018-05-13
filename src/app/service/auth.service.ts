@@ -1,10 +1,9 @@
-import 'rxjs/add/observable/of';
 
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { AppUser } from '../interface/app-user';
 import { UserService } from './user.service';

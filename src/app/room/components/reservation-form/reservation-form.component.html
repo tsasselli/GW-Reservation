@@ -26,7 +26,7 @@
              [ngClass]="{'is-invalid' : email.errors && email.touched }"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="email"
-             [value]="user.email"
+             [value]="user?.email"
              ngModel
              required>
       <div [hidden]="!email.errors?.required" class="invalid-feedback">
@@ -61,12 +61,21 @@
       </div>
     </div>
   </div>
+<div>
+  <label>
+    Date Time:
+    <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+    <owl-date-time #dt></owl-date-time>
+  </label>
 
   <label>
     Date Time:
     <input [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5">
     <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
   </label>
+
+
+</div>
 
 
   <!-- <div class="form-group">

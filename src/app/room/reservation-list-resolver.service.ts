@@ -1,7 +1,7 @@
 import { RoomComponent } from './components/room.component';
 import { RoomService } from './../service/room.service';
 import { IRoom } from './../interface/IRoom';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 

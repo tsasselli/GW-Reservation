@@ -1,11 +1,10 @@
-import { map } from 'rxjs/operators';
 import { IRoom } from './../../interface/IRoom';
 import { RoomService } from './../../service/room.service';
 import { INavigationItem } from './../../interface/INavigationItem';
 import { Component, OnInit } from '@angular/core';
 import { UrlResolver } from '@angular/compiler';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/do';
+import { Subscription, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'gw-nav-bar',
@@ -25,9 +24,9 @@ export class NavBarComponent implements OnInit {
   }
 
   private initalizeRoom() {
-    this.roomService.rooms$
+    this.roomService.rooms$.pipe(
       // add welcome to front of array. 
-      .do(rooms => {
+      tap(rooms => {
         this.navArr = [];
         this.navArr.unshift({
           title: "Welcome",
@@ -35,9 +34,9 @@ export class NavBarComponent implements OnInit {
         });
         console.log(rooms, "do")
         return rooms;
-      })
+      }),
       // add the rooms name and id properties
-      .map(rooms => {
+      map(rooms => {
         return rooms.map(room => {
           const navItem: INavigationItem = {
             title: room.name,
@@ -45,7 +44,7 @@ export class NavBarComponent implements OnInit {
           };
           return navItem;
         });
-      })
+      }))
       .subscribe(rooms => {
         this.navArr = this.navArr.concat(rooms);
       })

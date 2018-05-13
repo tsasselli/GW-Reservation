@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AppUser } from './../interface/app-user';
 import { Injectable } from '@angular/core';
