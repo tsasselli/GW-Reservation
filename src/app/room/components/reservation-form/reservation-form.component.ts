@@ -1,23 +1,30 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
 import { Reservation } from '../../../interface/Reservation';
 import { RoomService } from '../../../service/room.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { AppUser } from './../../../interface/app-user';
+import { AuthService } from './../../../service/auth.service';
 
 @Component({
   selector: 'gw-reservation-form',
   templateUrl: './reservation-form.component.html',
-  styleUrls: ['./reservation-form.component.scss']
+  styleUrls: ['./reservation-form.component.scss'],
 })
 export class ReservationFormComponent implements OnInit {
   roomId: string;
+  roomID;
   reservationType: string[];
   startTime: string;
   endTime: string;
   selectedDate;
+  user: AppUser;
 
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.reservationType = [
@@ -27,10 +34,14 @@ export class ReservationFormComponent implements OnInit {
       "No-Instructor"
     ];
     // gets the params and uses changeRoomID to assign it to local property roomID
-    this.route.paramMap.subscribe(params => {
+    this.route.parent.paramMap.subscribe(params => {
       this.assignRoomId(params.get('id'));
     })
-    this.testId();
+
+    this.authService.appUser$.subscribe(user => {
+      this.user = user });
+
+    //this.testId();
   }
 
   save(res: Reservation) {
@@ -47,6 +58,7 @@ export class ReservationFormComponent implements OnInit {
   // helper func for storing params/:id  to roomId
   private assignRoomId(id: string) {
     this.roomId = id;
+    this.roomID = this.roomId ? this.roomId.charAt(0).toUpperCase() + this.roomId.substr(1).toLowerCase() : "";
   }
 
 }

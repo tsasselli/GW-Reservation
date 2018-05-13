@@ -4,6 +4,10 @@
             {{ user.name }}
         </span>
     </li> -->
+        <!-- <li [style.backgroundImage]="'url(' + user.pictureUrl + ')'" class="nav-item image-thumbnail" alt=""></li> -->
+   <!-- <div class="nav-item">
+       <img src="user?.pictureUrl"  class="navbar-brand">
+   </div> -->
     <li ngbDropdown class="nav-item dropdown ">
         <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navBarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span *ngIf="!user" class="navbar-text">Login</span>

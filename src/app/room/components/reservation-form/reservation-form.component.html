@@ -1,4 +1,4 @@
-<h1> Make a reservation for room: {{ roomId }}</h1>
+<h1> Make a reservation for {{ roomID }}</h1>
 
 <form #reservationForm="ngForm" (ngSubmit)="save(reservationForm.value)">
     <div class="form-group">
@@ -26,6 +26,7 @@
              [ngClass]="{'is-invalid' : email.errors && email.touched }"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="email"
+             [value]="user.email"
              ngModel
              required>
       <div [hidden]="!email.errors?.required" class="invalid-feedback">
@@ -60,6 +61,14 @@
       </div>
     </div>
   </div>
+
+  <label>
+    Date Time:
+    <input [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5">
+    <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
+  </label>
+
+
   <!-- <div class="form-group">
     <label for="startTime">Start Time</label>
     <input #startTime="ngModel" 

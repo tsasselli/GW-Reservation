@@ -11,7 +11,7 @@ const routes: Routes = [
    // {   path: 'room/new', component: NewRoomFormComponent },
     {
         path: "rooms/:id",
-        //resolve: { resvList: ReservationListResolverService },
+        // resolve: { resvList: ReservationListResolverService },
         component: RoomComponent,
         children: [
             {   path: 'form', component: ReservationFormComponent },

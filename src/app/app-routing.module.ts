@@ -8,7 +8,6 @@ import { HomeComponent } from './welcome/home/home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'welcome', component: HomeComponent },
-  { path: 'rooms', loadChildren: './room/room-routing.module#RoomRoutingModule'},
   { path: 'about', component: AboutComponent },
   { path: '**', component: NotFoundComponent },
   
