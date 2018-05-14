@@ -8,7 +8,8 @@
               id="reason" 
               [ngClass]="{'is-invalid' : reason.errors && reason.touched }"
               class="form-control"
-              ngModel required>
+              ngModel
+              required>
         <option *ngFor="let type of reservationType">
           {{ type }}
         </option>
@@ -20,9 +21,9 @@
   <div class="form-group">
     <label for="email">Email</label>
     <div class="input-group">
-      <input type="text"
+      <input type="email"
              class="form-control" 
-             #email="ngModel" 
+             #email="ngModel"
              [ngClass]="{'is-invalid' : email.errors && email.touched }"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="email"
@@ -40,9 +41,9 @@
   <div class="form-group">
     <label for="emailConfirmation">Confirm Email</label>
     <div class="input-group">
-      <input type="text"
+      <input type="email"
              class="form-control" 
-             #emailConfirmation="ngModel" 
+             #emailConfirmation="ngModel"
              [ngClass]="{'is-invalid' : emailConfirmation.errors && emailConfirmation.touched}"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="emailConfirmation"
@@ -60,23 +61,30 @@
         Please make sure both emails match.
       </div>
     </div>
-  </div>
-<div>
-  <label>
-    Date Time:
-    <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
-    <owl-date-time #dt></owl-date-time>
-  </label>
+    </div>
+  <!-- <div class="form-group">
+    <label for="date">
+      Date Time:
+      </label>
+    <div class="input-group">
+        <input 
+              #date="ngModel"
+              class="form-control"
+              [owlDateTimeTrigger]="dt"
+              name="date"
+              ngModel
+              [owlDateTime]="dt"
+              required>
+        <owl-date-time #dt [hour12Timer]="true"></owl-date-time>
+      <h4>{{date}}</h4>
+    </div>
+</div> -->
 
-  <label>
-    Date Time:
-    <input [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5">
-    <owl-date-time [pickerMode]="'dialog'" #dt5></owl-date-time>
-  </label>
-
-
+<div class="input-wrapper">
+  <label>Date Time(binding via ngModel):</label>
+  <input ngModel="reservation.date" name="date"[owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
+  <owl-date-time #dtPicker1 [hour12Timer]="true"></owl-date-time>
 </div>
-
 
   <!-- <div class="form-group">
     <label for="startTime">Start Time</label>

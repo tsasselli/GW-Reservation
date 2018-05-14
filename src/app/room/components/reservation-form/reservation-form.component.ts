@@ -14,12 +14,13 @@ import { AuthService } from './../../../service/auth.service';
 })
 export class ReservationFormComponent implements OnInit {
   roomId: string;
-  roomID;
+  roomID: string;
+  reservation: Reservation;
   reservationType: string[];
-  startTime: string;
-  endTime: string;
   selectedDate;
   user: AppUser;
+  //date: Date;
+  public date = [new Date(2018, 1, 12, 10, 30), new Date(2018, 3, 21, 20, 30)];
 
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,
