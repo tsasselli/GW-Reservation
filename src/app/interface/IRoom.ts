@@ -10,7 +10,7 @@ export class IRoom {
 constructor(public id: string, 
             public name: string,
             public picture: string,
-            public reservations: Reservation[]) {
+            public reservations?: Reservation[]) {
 
 }
 

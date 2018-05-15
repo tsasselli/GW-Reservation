@@ -23,8 +23,8 @@ export class RoomService {
     return this.db.list("rooms/" + roomId + "/reservations").push(reservation);
   };
 
-  createRoom(room: IRoom) {
-    return this.db.list("rooms").push(room);
+  createRoom() {
+    return this.db.list("rooms");
   }
 
   getRoomById(id): Observable<IRoom> {

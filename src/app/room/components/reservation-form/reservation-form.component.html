@@ -14,10 +14,10 @@
           {{ reason }}
         </option>
       </select>
-      <gw-reservation-reason></gw-reservation-reason>
       <div class="invalid-feedback" *ngIf="reason.touched && reason.invalid">
-        Please choose and activity from the list
+        Please choose an activity from the list
       </div>
+       <gw-reservation-reason></gw-reservation-reason>
     </div>
   <div class="form-group">
     <label for="email">Email</label>
