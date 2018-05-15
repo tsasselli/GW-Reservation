@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IRoom } from '../../../interface/IRoom';
+import { Room } from '../../../interface/Room';
 import { RoomService } from '../../../service/room.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { RoomService } from '../../../service/room.service';
   styleUrls: ['./room-reservations.component.scss']
 })
 export class RoomReservationsComponent implements OnInit {
-  room: IRoom;
+  room: Room;
   private roomId: string;
 
 

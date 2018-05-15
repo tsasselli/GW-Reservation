@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { IRoom } from './../interface/IRoom';
+import { Room } from '../interface/Room';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireList } from 'angularfire2/database';
@@ -10,10 +10,10 @@ import { debug } from 'util';
 
 export class RoomService {
   // create an observable to store IRoom value
-  rooms$: Observable<IRoom[]>;
+  rooms$: Observable<Room[]>;
 
   constructor(private db: AngularFireDatabase) {
-    const room: AngularFireList<IRoom> = this.db.list("rooms");
+    const room: AngularFireList<Room> = this.db.list("rooms");
     this.rooms$ = room.valueChanges();
   };
 
@@ -27,20 +27,20 @@ export class RoomService {
     return this.db.list("rooms");
   }
 
-  getRoomById(id): Observable<IRoom> {
+  getRoomById(id): Observable<Room> {
     return this.getRoomWithReservation(id);
   }
 
-  private getRoom(id): Observable<IRoom> {
+  private getRoom(id): Observable<Room> {
     return this.rooms$.pipe(
       // first have to map through rooms to find the room equal to the input id
-      map((rooms: IRoom[]) => rooms.find(room => room.id === id)))
+      map((rooms: Room[]) => rooms.find(room => room.id === id)))
     // returns an object/observable with an unparsed reservations array.
   }
 
-  private getRoomWithReservation(id): Observable<IRoom> {
+  private getRoomWithReservation(id): Observable<Room> {
     return this.getRoom(id)
-      .map((room: IRoom) => {
+      .map((room: Room) => {
         const reservations = [];
         // loop through the reservations array attached to IRoom
         // unpacks the reservatoins array so it can be used in Observable < IRoom >

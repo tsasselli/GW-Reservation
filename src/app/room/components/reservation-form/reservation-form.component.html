@@ -25,7 +25,7 @@
       <input type="email"
              class="form-control" 
              #email="ngModel"
-             [ngClass]="{'is-invalid' : email.errors && email.touched }"
+             [ngClass]="{'is-invalid' : email.errors }"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="email"
              [value]="user?.email"

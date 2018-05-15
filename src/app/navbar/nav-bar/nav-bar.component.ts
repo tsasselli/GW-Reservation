@@ -1,4 +1,4 @@
-import { IRoom } from './../../interface/IRoom';
+import { Room } from '../../interface/Room';
 import { RoomService } from './../../service/room.service';
 import { INavigationItem } from './../../interface/INavigationItem';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +14,7 @@ import { map, tap } from 'rxjs/operators';
 
 export class NavBarComponent implements OnInit {
   navArr: INavigationItem[];
-  rooms: IRoom[];
+  rooms: Room[];
   sub: Subscription;
   
   constructor(private roomService: RoomService) { }

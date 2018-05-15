@@ -1,5 +1,5 @@
 import { Reservation } from './../../../interface/Reservation';
-import { IRoom } from './../../../interface/IRoom';
+import { Room } from '../../../interface/Room';
 import { RoomService } from './../../../service/room.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Form, NgForm } from '@angular/forms';
@@ -10,7 +10,7 @@ import { FormGroup, Form, NgForm } from '@angular/forms';
   styleUrls: ['./new-room-form.component.scss']
 })
 export class NewRoomFormComponent implements OnInit {
-  room: IRoom;
+  room: Room;
   roomName: string;
   pictureUrl: string;
 
@@ -22,9 +22,9 @@ export class NewRoomFormComponent implements OnInit {
   }
 
   submitNewRoom(room) {
-    const id: string = room.name.toLowerCase();
+    const id: string = room.name.replace(/\s/g, "").toLowerCase() ;
     console.log(id);
-    const newRoom = new IRoom(id, room.name, room.pictureUrl, [])
+    const newRoom = new Room(id, room.name, room.pictureUrl, [])
     this.roomService.createRoom().set(id, newRoom);
   }
 }

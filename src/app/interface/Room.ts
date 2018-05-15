@@ -1,6 +1,6 @@
 import { Reservation } from './Reservation';
 
-export class IRoom {
+export class Room {
     // id: string;
     // name: string;
     // picture?: string;
