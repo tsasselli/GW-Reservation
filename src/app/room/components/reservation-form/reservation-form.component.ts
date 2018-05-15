@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { Reservation } from '../../../interface/Reservation';
+import { ReasonService } from '../../../service/reason.service';
 import { RoomService } from '../../../service/room.service';
 import { AppUser } from './../../../interface/app-user';
 import { AuthService } from './../../../service/auth.service';
@@ -19,13 +19,14 @@ export class ReservationFormComponent implements OnInit {
   reservationType: string[];
   selectedDate;
   user: AppUser;
+  reason$;
   //date: Date;
-  public date = [new Date(2018, 1, 12, 10, 30), new Date(2018, 3, 21, 20, 30)];
 
   constructor(private roomService: RoomService,
               private route: ActivatedRoute,
               private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private reasonService: ReasonService) { }
 
   ngOnInit() {
     this.reservationType = [
@@ -41,7 +42,7 @@ export class ReservationFormComponent implements OnInit {
 
     this.authService.appUser$.subscribe(user => {
       this.user = user });
-
+      this.reason$ = this.reasonService.reason$;
     //this.testId();
   }
 

@@ -1,3 +1,4 @@
+import { ReasonService } from './../service/reason.service';
 import { RoomReservationsComponent } from './components/room-reservations/room-reservations.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RoomService } from './../service/room.service';
@@ -14,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [ RoomRoutingModule,
-               RoomReservationsComponent,
                FormsModule,
                CommonModule, 
                CustomFormsModule,
@@ -25,7 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
                NgbModule.forRoot(),
              ],
     declarations: [routingComponents],
-    providers: [RoomService, ReservationListResolverService]
+    providers: [ RoomService, ReservationListResolverService, ReasonService ] 
 
 })
 

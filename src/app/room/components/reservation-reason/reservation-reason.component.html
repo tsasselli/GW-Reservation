@@ -1,3 +1,12 @@
-<p>
-  reservation-reason works!
-</p>
+<form #reasonForm="ngForm" >
+  <div class="form-group">
+    <label for="reason">New Reason:</label>
+    <input type="text"
+           #reason="ngModel"
+           ngModel
+           name="reason"
+           class="form-control"
+           required>       
+  </div>
+  <button [disabled]="!reasonForm.valid" (click)="saveNewReason(reason.value)" class="btn btn-primary">Save</button>
+</form>

@@ -10,10 +10,11 @@
               class="form-control"
               ngModel
               required>
-        <option *ngFor="let type of reservationType">
-          {{ type }}
+        <option *ngFor="let reason of reason$ | async" >
+          {{ reason }}
         </option>
       </select>
+      <gw-reservation-reason></gw-reservation-reason>
       <div class="invalid-feedback" *ngIf="reason.touched && reason.invalid">
         Please choose and activity from the list
       </div>

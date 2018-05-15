@@ -1,3 +1,4 @@
+import { ReservationReasonComponent } from './components/reservation-reason/reservation-reason.component';
 import { ReservationListResolverService } from './reservation-list-resolver.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,7 +9,7 @@ import { RoomReservationsComponent } from './components/room-reservations/room-r
 import { RoomComponent } from './components/room.component';
 
 const routes: Routes = [
-   // {   path: 'room/new', component: NewRoomFormComponent },
+    {   path: 'room/new', component: NewRoomFormComponent },
     {
         path: "rooms/:id",
         // resolve: { resvList: ReservationListResolverService },
@@ -36,5 +37,5 @@ const routes: Routes = [
 })
 export class RoomRoutingModule { }
 
-export const routingComponents = [ RoomComponent, ReservationFormComponent, RoomReservationsComponent, NewRoomFormComponent ]
+export const routingComponents = [ RoomComponent, ReservationFormComponent, RoomReservationsComponent, NewRoomFormComponent, ReservationReasonComponent ]
 

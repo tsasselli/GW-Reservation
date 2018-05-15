@@ -25,9 +25,38 @@ export class RoomService {
 
   createRoom(room: IRoom) {
     return this.db.list("rooms").push(room);
-  };
+  }
 
-  // use .pipe() to make map chaining treeShakable, better perfomance than
+  getRoomById(id): Observable<IRoom> {
+    return this.getRoomWithReservation(id);
+  }
+
+  private getRoom(id): Observable<IRoom> {
+    return this.rooms$.pipe(
+      // first have to map through rooms to find the room equal to the input id
+      map((rooms: IRoom[]) => rooms.find(room => room.id === id)))
+    // returns an object/observable with an unparsed reservations array.
+  }
+
+  private getRoomWithReservation(id): Observable<IRoom> {
+    return this.getRoom(id)
+      .map((room: IRoom) => {
+        const reservations = [];
+        // loop through the reservations array attached to IRoom
+        // unpacks the reservatoins array so it can be used in Observable < IRoom >
+        for (let resKey in room.reservations) {
+          const reservation = room.reservations[resKey];
+          reservation.id = resKey; // attaches the id/key to reservation
+          reservations.push(reservation); // pushes it into the reservations array
+        }
+        // assign the room.reservations param to the looped reservations array 
+        room.reservations = reservations;
+        return room;
+      });
+  };
+}
+
+// use .pipe() to make map chaining treeShakable, better perfomance than
   // previous implementation (below) notes attached to prev implementation 
 //   getRoomById(id): Observable<IRoom> {
 //     console.log(id);
@@ -47,36 +76,6 @@ export class RoomService {
 //     )
 //   }
 // }
-
-
-getRoomById(id): Observable < IRoom > {
-  return this.getRoomWithReservation(id);
-}
-
-  private getRoom(id): Observable < IRoom > {
-  return this.rooms$.pipe(
-    // first have to map through rooms to find the room equal to the input id
-    map((rooms: IRoom[]) => rooms.find(room => room.id === id)))
-  // returns an object/observable with an unparsed reservations array.
-}
-
-  private getRoomWithReservation(id): Observable < IRoom > {
-  return this.getRoom(id)
-    .map((room: IRoom) => {
-      const reservations = [];
-      // loop through the reservations array attached to IRoom
-      // unpacks the reservatoins array so it can be used in Observable < IRoom >
-      for (let resKey in room.reservations) {
-        const reservation = room.reservations[resKey];
-        reservation.id = resKey; // attaches the id/key to reservation
-        reservations.push(reservation); // pushes it into the reservations array
-      }
-      // assign the room.reservations param to the looped reservations array 
-      room.reservations = reservations;
-      return room;
-    });
-};
-}
   // getRoomById(id): Observable<IRoom> {
   //   return this.getRoomWithReservation(id);
   // };
