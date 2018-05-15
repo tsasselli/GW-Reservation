@@ -1,3 +1,4 @@
+import { RoomReservationsComponent } from './components/room-reservations/room-reservations.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RoomService } from './../service/room.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [ RoomRoutingModule,
+               RoomReservationsComponent,
                FormsModule,
                CommonModule, 
                CustomFormsModule,
