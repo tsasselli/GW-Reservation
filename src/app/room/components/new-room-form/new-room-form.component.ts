@@ -13,8 +13,7 @@ export class NewRoomFormComponent implements OnInit {
   room: Room;
   roomName: string;
   pictureUrl: string;
-
-
+  
   constructor(private roomService: RoomService) { 
   }
 

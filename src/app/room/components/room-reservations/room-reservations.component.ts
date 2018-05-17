@@ -13,7 +13,6 @@ export class RoomReservationsComponent implements OnInit {
   room: Room;
   private roomId: string;
 
-
   constructor(private route: ActivatedRoute,
               private roomService: RoomService) { }
 

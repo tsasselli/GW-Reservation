@@ -1,8 +1,10 @@
-export interface Reservation {
-    email: string;
-    emailConfirmation: string;
-    reason: string;
-    date: Date;
-    isAgreed?: string;
-    id?: string;
+export class Reservation {
+
+    constructor(public email: string, 
+                public emailConfirmation: string, 
+                public name: string,
+                public reason: string, 
+        public startDate: { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}, 
+                public isAgreed?: string,
+                public id?: string) { }
 }

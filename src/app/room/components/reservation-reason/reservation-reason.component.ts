@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './reservation-reason.component.html',
   styleUrls: ['./reservation-reason.component.scss']
 })
+
 export class ReservationReasonComponent implements OnInit {
   reason$;
 

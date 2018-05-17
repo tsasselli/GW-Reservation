@@ -1,6 +1,5 @@
 <h1> Make a reservation for {{ roomID }}</h1>
-
-<form #reservationForm="ngForm" (ngSubmit)="save(reservationForm.value)">
+<form #resvForm="ngForm">
     <div class="form-group">
       <label for="reason">Reserve For:</label>
       <select #reason="ngModel" 
@@ -17,19 +16,44 @@
       <div class="invalid-feedback" *ngIf="reason.touched && reason.invalid">
         Please choose an activity from the list
       </div>
-       <gw-reservation-reason></gw-reservation-reason>
+      <button class="btn btn-sm" (click)="showNewReasonForm = !showNewReasonForm">Add New Reason</button>
+      <div *ngIf="showNewReasonForm">
+        <gw-reservation-reason></gw-reservation-reason>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <div class="input-group">
+        <input type="text" 
+               class="form-control"
+               #name
+               [ngClass]="{'is-invalid' : name.errors && name.touched}"
+               name="name"
+               [equalTo]="email"
+               [(ngModel)]="user.name"
+                email 
+               >
+        <div [hidden]="!name.errors?.required" class="invalid-feedback">
+          Name required
+        </div>
+        <div [hidden]="!name.errors?.pattern" class="invalid-feedback">
+          Email is not valid, please enter a valid Email address.
+        </div>
+        <div [hidden]="!name.errors?.equalTo" class="invalid-feedback">
+          Please make sure both emails match.
+        </div>
+      </div>
     </div>
   <div class="form-group">
     <label for="email">Email</label>
     <div class="input-group">
       <input type="email"
              class="form-control" 
-             #email="ngModel"
-             [ngClass]="{'is-invalid' : email.errors }"
+             #email
+             [ngClass]="{'is-invalid' : email.errors && email.touched}"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="email"
-             [value]="user?.email"
-             ngModel
+             [(ngModel)]="user.email"
              required>
       <div [hidden]="!email.errors?.required" class="invalid-feedback">
         Email required
@@ -81,44 +105,19 @@
     </div>
 </div> -->
 
-<div class="input-wrapper">
-  <label>Date Time(binding via ngModel):</label>
-  <input ngModel="date" name="date"[owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
+<div class="form-group">
+  <label for="date">Start Time:</label>
+  <div class="input-group">
+  <input #date="ngModel" ngModel name="date" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
   <owl-date-time #dtPicker1 [hour12Timer]="true"></owl-date-time>
+  </div>
 </div>
 
-  <!-- <div class="form-group">
-    <label for="startTime">Start Time</label>
-    <input #startTime="ngModel" 
-           [(ngModel)]="startTime"
-           name="startTime" 
-           id="startTime"
-           type="number"
-           class="form-control"
-           required minDate="startTime"> 
-    </div>
-  <div class="alert alert-danger" *ngIf="startTime.touched && startTime.invalid">
-    <div *ngIf="startTime?.errors?.required">Start time required </div>
-    <div *ngIf="startTime?.errors?.minDate">Please a valid date, choose a date from {{ startTime }} forward! </div>
-  </div> -->
-  <!-- <div class="form-group">
-    <div class="input-group">
-      <input class="form-control"
-             placeholder="yyyy-mm-dd"
-             name="dp"
-             [(ngModel)]="selectedDate"
-             ngbDatepicker
-             #d="ngbDatepicker"
-             required>
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-          <img src="../../../assets/images/calendarSVG.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-        </button>
-      </div>
-    </div>
-  </div> -->
-
-
-  <button [disabled]="reservationForm.invalid" class="btn btn-primary">Save</button>
+<div class="form-check">
+  <label class="btn-primary" ngbButtonLabel>
+    <input type="checkbox" name="isAgreed" #isAgreed="ngModel" ngModel ngbButton required> Do you agree to the Reservation Terms?
+  </label>
+</div>
+  <button (click)="save(resvForm.value)"  class="btn btn-primary">Save</button>
   <!-- <button type="button" (click)="delete()" class="btn btn-danger">Delete</button> -->
 </form>
