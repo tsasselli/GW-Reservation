@@ -2,6 +2,7 @@
 <form #resvForm="ngForm">
     <div class="form-group">
       <label for="reason">Reserve For:</label>
+      <div class="input-group">
       <select #reason="ngModel" 
               name="reason" 
               id="reason" 
@@ -13,47 +14,43 @@
           {{ reason }}
         </option>
       </select>
+      <div class="input-group-append">
+        <span class="input-group-btn">
+          <button class="btn btn-outline-secondary" (click)="showNewReasonForm = !showNewReasonForm">Add New Reason</button>
+        </span>
+      </div>
       <div class="invalid-feedback" *ngIf="reason.touched && reason.invalid">
         Please choose an activity from the list
       </div>
-      <button class="btn btn-sm" (click)="showNewReasonForm = !showNewReasonForm">Add New Reason</button>
-      <div *ngIf="showNewReasonForm">
-        <gw-reservation-reason></gw-reservation-reason>
-      </div>
+    </div>
+    </div>
+    <div *ngIf="showNewReasonForm">
+      <gw-reservation-reason></gw-reservation-reason>
     </div>
     <div class="form-group">
-      <label for="name">Name:</label>
+      <label for="userName">Name:</label>
       <div class="input-group">
         <input type="text" 
                class="form-control"
                #name
                [ngClass]="{'is-invalid' : name.errors && name.touched}"
                name="name"
-               [equalTo]="email"
-               [(ngModel)]="user.name"
-                email 
-               >
+               [(ngModel)]="userName">
         <div [hidden]="!name.errors?.required" class="invalid-feedback">
           Name required
-        </div>
-        <div [hidden]="!name.errors?.pattern" class="invalid-feedback">
-          Email is not valid, please enter a valid Email address.
-        </div>
-        <div [hidden]="!name.errors?.equalTo" class="invalid-feedback">
-          Please make sure both emails match.
         </div>
       </div>
     </div>
   <div class="form-group">
-    <label for="email">Email</label>
+    <label for="userEmail">Email</label>
     <div class="input-group">
-      <input type="email"
+      <input type="userEmail"
              class="form-control" 
              #email
+             [(ngModel)]="userEmail"
              [ngClass]="{'is-invalid' : email.errors && email.touched}"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              name="email"
-             [(ngModel)]="user.email"
              required>
       <div [hidden]="!email.errors?.required" class="invalid-feedback">
         Email required
@@ -106,18 +103,21 @@
 </div> -->
 
 <div class="form-group">
-  <label for="date">Start Time:</label>
-  <div class="input-group">
-  <input #date="ngModel" ngModel name="date" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
-  <owl-date-time #dtPicker1 [hour12Timer]="true"></owl-date-time>
-  </div>
-</div>
+        <label for="startTime">Start Time:</label>
+
+        <input #startTime="ngModel" ngModel name="startTime" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
+        <owl-date-time #dtPicker1 [hour12Timer]="true"></owl-date-time>
+                    <label for="endTime">End Time:</label>
+        <input #endTime="ngModel" ngModel name="endTime" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+        <owl-date-time #dtPicker2 [hour12Timer]="true"></owl-date-time>
+      </div>
+  
 
 <div class="form-check">
   <label class="btn-primary" ngbButtonLabel>
     <input type="checkbox" name="isAgreed" #isAgreed="ngModel" ngModel ngbButton required> Do you agree to the Reservation Terms?
   </label>
 </div>
-  <button (click)="save(resvForm.value)"  class="btn btn-primary">Save</button>
+  <button (click)="save(resvForm.value)" [disabled]="!resvForm.valid" class="btn btn-primary">Save</button>
   <!-- <button type="button" (click)="delete()" class="btn btn-danger">Delete</button> -->
 </form>

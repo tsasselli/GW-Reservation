@@ -1,3 +1,4 @@
+import { LoginGuardService } from './../service/login-guard.service';
 import { ReservationReasonComponent } from './components/reservation-reason/reservation-reason.component';
 import { ReservationListResolverService } from './reservation-list-resolver.service';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,7 @@ const routes: Routes = [
         path: "rooms/:id",
         // resolve: { resvList: ReservationListResolverService },
         component: RoomComponent,
+        canActivate: [LoginGuardService],
         children: [
             {   path: 'form', component: ReservationFormComponent },
             { path: 'reservations', /*resolve: { resvList: ReservationListResolverService },*/ component: RoomReservationsComponent },

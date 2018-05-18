@@ -54,6 +54,10 @@ export class RoomService {
         return room;
       });
   };
+
+  deeteReservation(id, resv) {
+    this.db.list(`rooms/${id}/reservations`).remove(resv);
+  }
 }
 
 // use .pipe() to make map chaining treeShakable, better perfomance than

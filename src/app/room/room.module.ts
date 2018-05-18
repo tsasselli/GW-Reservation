@@ -12,6 +12,7 @@ import { RoomRoutingModule, routingComponents } from './room-routing.module';
 import { ReservationListResolverService } from './reservation-list-resolver.service';
 import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginGuardService } from '../service/login-guard.service';
 
 @NgModule({
     imports: [ RoomRoutingModule,
@@ -25,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
                NgbModule.forRoot(),
              ],
     declarations: [routingComponents],
-    providers: [ RoomService, ReservationListResolverService, ReasonService ] 
+    providers: [ RoomService, ReservationListResolverService, ReasonService, LoginGuardService ] 
 
 })
 

@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
+import { IReason } from '../../../interface/IReason';
 import { Reservation } from '../../../interface/Reservation';
 import { ReasonService } from '../../../service/reason.service';
 import { RoomService } from '../../../service/room.service';
 import { AppUser } from './../../../interface/app-user';
 import { AuthService } from './../../../service/auth.service';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'gw-reservation-form',
@@ -18,11 +18,10 @@ export class ReservationFormComponent implements OnInit {
   roomId: string;
   roomID: string;
   reservation: Reservation;
-  reservationType: string[];
-  pickerInput: { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-  selectedDate;
   user: AppUser;
-  reason$;
+  userName: string;
+  userEmail: string;
+  reason$: Observable<IReason[]>;
   showNewReasonForm: boolean = false;
 
   constructor(private roomService: RoomService,
@@ -32,15 +31,9 @@ export class ReservationFormComponent implements OnInit {
               private reasonService: ReasonService) { }
 
   ngOnInit() {
-    // gets the params and uses changeRoomID to assign it to local property roomID
-    this.route.parent.paramMap.subscribe(params => {
-      this.assignRoomId(params.get('id'));
-    })
-
-   this.authService.appUser$.subscribe(user => {
-      this.user = user
-    });
-    this.reason$ = this.reasonService.reason$;
+   this.getParentRouteId();
+   this.getUser();
+   this.reason$ = this.reasonService.reason$;
     //this.testId();
   }
 
@@ -48,10 +41,10 @@ export class ReservationFormComponent implements OnInit {
     const reason: string = resvForm.reason;
     const emailConf: string = resvForm.emailConfirmation;
     const email: string = resvForm.email;
-    const startDate = this.pickerInput;
+    const startDate: string = this.editDateString(resvForm.startTime);
+    const endDate: string = this.editDateString(resvForm.endTime);
     const isAgreed = resvForm.isAgreed;
-    console.log(startDate);
-    const newResv = new Reservation(email, emailConf, resvForm.name , reason, startDate, isAgreed, '')
+    const newResv = new Reservation(email, emailConf, resvForm.name , reason, startDate, endDate, isAgreed, '')
     
     return this.roomService.saveReservation(this.roomId, newResv)
       // navigates to the sibling route.. https://stackoverflow.com/questions/39124906/navigate-relative-with-angular-2-router-version-3
@@ -63,8 +56,27 @@ export class ReservationFormComponent implements OnInit {
     toggle = !toggle
   }
 
-  private testId() {
-    console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
+  // private testId() {
+  //   console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
+  // }
+
+  private getParentRouteId() {
+    // gets the params and uses changeRoomID to assign it to local property roomID
+    this.route.parent.paramMap.subscribe(params => {
+      this.assignRoomId(params.get('id'));
+    })
+  }
+
+  private editDateString (date: Date) : string {
+    return date.toString();
+  }
+
+  private getUser() {
+    this.authService.appUser$.subscribe(user => {
+      this.user = user;
+      this.userName = user.name;
+      this.userEmail = user.email;
+    });
   }
 
   // helper func for storing params/:id  to roomId
@@ -72,4 +84,5 @@ export class ReservationFormComponent implements OnInit {
     this.roomId = id;
     this.roomID = this.roomId ? this.roomId.charAt(0).toUpperCase() + this.roomId.substr(1).toLowerCase() : "";
   }
+
 }

@@ -22,16 +22,16 @@ export class RoomReservationsComponent implements OnInit {
     .subscribe(params => {
       this.assignRoom(params.get('id'));
     })
-    this.testId();
+    //this.testId();
    }
 
-  testId() {
+  private testId() {
     console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
   }
 
    private assignRoom(id) {
      if (!id) return;
-     
+
      this.roomId = id;
      this.roomService.getRoomById(id).map(room => {
        if (!room.reservations) return;

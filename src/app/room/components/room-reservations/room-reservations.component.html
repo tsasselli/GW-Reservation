@@ -10,7 +10,8 @@
       <div class="card" *ngFor="let resv of room?.reservations">
         <li>Email: {{resv.email}}</li>
         <li>Reason: {{ resv.reason }}</li>
-        <li></li>
+        <li>Start Time: {{ resv.startDate | date : 'medium' }}</li>
+        <li>Start Time: {{ resv.endDate | date : 'medium' }}</li>
       </div>
       <ng-template #noRoom>
           <div [hidden]="room?.reservations.length > 0">There are no reservations for {{ room?.name }} today</div>

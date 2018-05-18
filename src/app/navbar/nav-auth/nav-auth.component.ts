@@ -1,6 +1,7 @@
 import { AppUser } from './../../interface/app-user';
 import { AuthService } from './../../service/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'gw-nav-auth',
@@ -8,17 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-auth.component.scss']
 })
 
-export class NavAuthComponent implements OnInit {
+export class NavAuthComponent implements OnInit, OnDestroy {
   user: AppUser;
+  sub: Subscription;
 
   constructor(private auth: AuthService) { }
 
    ngOnInit() {
-     this.auth.appUser$.subscribe(appUser => this.user = appUser);
+     this.sub = this.auth.appUser$.subscribe(appUser => this.user = appUser);
   }
 
   logout() {
     this.auth.logout();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }
