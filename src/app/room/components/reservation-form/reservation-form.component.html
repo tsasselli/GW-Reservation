@@ -104,15 +104,25 @@
 
 <div class="form-group">
         <label for="startTime">Start Time:</label>
-
-        <input #startTime="ngModel" ngModel name="startTime" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
-        <owl-date-time #dtPicker1 [hour12Timer]="true"></owl-date-time>
-                    <label for="endTime">End Time:</label>
-        <input #endTime="ngModel" ngModel name="endTime" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
-        <owl-date-time #dtPicker2 [hour12Timer]="true"></owl-date-time>
+        <input  ngModel
+                #startTime="ngModel" 
+                name="startTime" 
+                [owlDateTime]="dtPicker1"
+                [owlDateTimeTrigger]="dtPicker1">
+        <owl-date-time #dtPicker1
+                       [hour12Timer]="true"
+                       [startAt]="startTime"></owl-date-time>
+        <label for="endTime">End Time:</label>
+        <input  ngModel
+                name="endTime"
+                #endTime="ngModel"
+                [owlDateTimeTrigger]="dtPicker2"
+                [owlDateTime]="dtPicker2">
+        <owl-date-time #dtPicker2
+                       [hour12Timer]="true"
+                       [startAt]="endTime">
+      </owl-date-time>
       </div>
-  
-
 <div class="form-check">
   <label class="btn-primary" ngbButtonLabel>
     <input type="checkbox" name="isAgreed" #isAgreed="ngModel" ngModel ngbButton required> Do you agree to the Reservation Terms?

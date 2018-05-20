@@ -17,10 +17,12 @@ import { AuthService } from './../../../service/auth.service';
 export class ReservationFormComponent implements OnInit {
   roomId: string;
   roomID: string;
-  reservation: Reservation;
   user: AppUser;
+  startTime: Date;
+  endTime: Date;
   userName: string;
   userEmail: string;
+  reservation: Reservation;
   reason$: Observable<IReason[]>;
   showNewReasonForm: boolean = false;
 
@@ -33,17 +35,21 @@ export class ReservationFormComponent implements OnInit {
   ngOnInit() {
    this.getParentRouteId();
    this.getUser();
+   this.setDefaultTime();
    this.reason$ = this.reasonService.reason$;
+   this.startTime;
+   console.log(this.startTime);
     //this.testId();
   }
 
   save(resvForm) {
     const reason: string = resvForm.reason;
-    const emailConf: string = resvForm.emailConfirmation;
     const email: string = resvForm.email;
-    const startDate: string = this.editDateString(resvForm.startTime);
-    const endDate: string = this.editDateString(resvForm.endTime);
+    const emailConf: string = resvForm.emailConfirmation;
+    const startDate: string = resvForm.startTime.toString();
+    const endDate: string = resvForm.endTime.toString();
     const isAgreed = resvForm.isAgreed;
+
     const newResv = new Reservation(email, emailConf, resvForm.name , reason, startDate, endDate, isAgreed, '')
     
     return this.roomService.saveReservation(this.roomId, newResv)
@@ -56,10 +62,6 @@ export class ReservationFormComponent implements OnInit {
     toggle = !toggle
   }
 
-  // private testId() {
-  //   console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
-  // }
-
   private getParentRouteId() {
     // gets the params and uses changeRoomID to assign it to local property roomID
     this.route.parent.paramMap.subscribe(params => {
@@ -67,8 +69,26 @@ export class ReservationFormComponent implements OnInit {
     })
   }
 
-  private editDateString (date: Date) : string {
-    return date.toString();
+  private getStartDate() {
+    const date = new Date();
+    date.setHours(date.getHours() + 1);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    console.log(date);
+    return date;
+  }
+
+  private getEndDate() {
+    const date = this.getStartDate();
+    date.setHours(date.getHours() + 1);
+    console.log(date);
+    return date;
+  }
+
+  private setDefaultTime() {
+    this.startTime = this.getStartDate()
+    this.endTime = this.getEndDate()
+    console.log(this.endTime)
   }
 
   private getUser() {
@@ -84,5 +104,9 @@ export class ReservationFormComponent implements OnInit {
     this.roomId = id;
     this.roomID = this.roomId ? this.roomId.charAt(0).toUpperCase() + this.roomId.substr(1).toLowerCase() : "";
   }
+
+  // private testId() {
+  //   console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
+  // }
 
 }

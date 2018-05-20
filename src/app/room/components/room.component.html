@@ -1,3 +1,6 @@
+<div *ngIf="room?.picture">
+    <img class="room-image" [src]="room?.picture">
+</div>
 <div>
     <router-outlet></router-outlet>
 </div>
