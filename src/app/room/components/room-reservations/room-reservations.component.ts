@@ -23,7 +23,9 @@ export class RoomReservationsComponent implements OnInit {
       this.assignRoom(params.get('id'));
     })
     //this.testId();
+    this.roomService.rooms$
    }
+
 
   private testId() {
     console.log(this.roomService.getRoomById(this.roomId).subscribe(roomId => console.log(roomId)));
@@ -43,4 +45,5 @@ export class RoomReservationsComponent implements OnInit {
      })
        .subscribe(room => {this.room = room});
    };
+
 }

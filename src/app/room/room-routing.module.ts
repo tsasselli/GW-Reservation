@@ -12,7 +12,7 @@ import { RoomComponent } from './components/room.component';
 const routes: Routes = [
     {   path: 'room/new', component: NewRoomFormComponent },
     {
-        path: "rooms/:id",
+        path: "rooms/:id/",
         // resolve: { resvList: ReservationListResolverService },
         component: RoomComponent,
         canActivate: [LoginGuardService],
